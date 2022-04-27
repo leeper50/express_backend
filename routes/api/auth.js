@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 const mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
+    host: "10.0.0.93",
+    user: "walter",
     password: "password",
     database: "project_database"
 });
@@ -70,6 +70,7 @@ router.post('/login', async (req, res) => {
     try {
         let storedPass;
         let query = `SELECT * FROM user_information WHERE user_name = '${req.body.username}'`;
+        
         await con.query(query, function(err, result) {
             // If fires when user does not exist
             if (result[0] == undefined) {
@@ -82,12 +83,12 @@ router.post('/login', async (req, res) => {
                     res.status(200).json({ status: 200})
                 }
                 else {
-                    res.status(400).json({ msg: 'Incorrect Password'})
+                    res.status(400).json({ status: 400})
                 }
             }
         });
     } catch{
-        res.send("Internal server error");
+        res.status(500).json({ status: 500})
     }
 });
 
