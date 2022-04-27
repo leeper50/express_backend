@@ -28,3 +28,6 @@ VALUES(NAME, PASSWORD, EMAIL, left(uuid(), 8), '{}')
 Gamestate:
 Contains data such as background loaded, tokens loaded, and token position.
 
+
+SQL query to create database from cli.
+CREATE TABLE `user_information`.`project_database` ( `user_id` INT NOT NULL AUTO_INCREMENT , `user_name` TEXT NOT NULL , `user_password` TEXT NOT NULL , `user_email` TEXT NOT NULL , `user_code` TEXT NOT NULL , `gamestate` JSON NOT NULL , PRIMARY KEY (`user_id`)) ENGINE = InnoDB; 
