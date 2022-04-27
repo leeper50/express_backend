@@ -7,10 +7,14 @@ const multer = require("multer");
 let background_list = [];
 let background_path = path.join(__dirname, '../../assets/backgrounds');
 
-fs.readdir(path.join(background_path), (err, files) => {
-    if (err) console.log(err)
-    background_list = files
-})
+function update_files() {
+    fs.readdir(path.join(background_path), (err, files) => {
+        if (err) console.log(err)
+        background_list = files
+    })
+}
+
+update_files()
 
 router.get('/', async(req, res) => {
     res.json(background_list);
@@ -39,8 +43,8 @@ const upload = multer({
     ), 
 });
 
-router.post("/upload" ,upload.single("file"), async(req, res) => {    
-    console.log(req.file);
+router.post("/", upload.single("file"), async(req, res) => {
+    update_files()
     res.json('/upload api');
 });
 

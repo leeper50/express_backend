@@ -7,13 +7,17 @@ const multer = require("multer");
 let token_list = [];
 let token_path = path.join(__dirname, '../../assets/tokens');
 
-fs.readdir(path.join(token_path), (err, files) => {
-    if (err) console.log(err)
-    token_list = files
-})
+
+function update_files() {
+    fs.readdir(path.join(token_path), (err, files) => {
+        if (err) console.log(err)
+        token_list = files
+    })
+}
+
+update_files()
 
 router.get('/', async(req, res) => {
-    console.log('ewhqeghjq')
     res.json(token_list);
 });
 
@@ -40,8 +44,8 @@ const upload = multer({
     ), 
 });
 
-router.post("/upload" ,upload.single("file"), async(req, res) => {    
-    console.log(req.file);
+router.post("/", upload.single("file"), async(req, res) => {
+    update_files()
     res.json('/upload api');
 });
 

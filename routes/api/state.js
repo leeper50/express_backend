@@ -25,7 +25,6 @@ con.connect( function(err) {
  * The state will be returned as a json object
  */
 router.get('/', async(req, res) => {
-    console.log('/state GET called');
     let exist_query = `SELECT gamestate FROM user_information WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
         if (result[0] == undefined) {
@@ -44,7 +43,6 @@ router.get('/', async(req, res) => {
  */
  router.post('/', async(req, res) => {
     let gamestate = JSON.stringify(req.body)
-    console.log('/state POST called');
     let exist_query = `UPDATE user_information SET gamestate = '${gamestate}' WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
         if (result.message.includes("(Rows matched: 0")) {
