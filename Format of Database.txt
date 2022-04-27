@@ -3,18 +3,12 @@ Format of Database
 Table: user_information
 
 columns:
-user_id🔑  user_name    user_password    user_email    user_code
-auto inc   string       string           string        string
+user_id🔑  user_name    user_password    user_email    user_code    gamestate
+auto inc   string       string           string        string       json
 
 Insert Syntax:
 INSERT INTO user_information(user_name, user_password, user_email, user_code) 
-VALUES(NAME, PASSWORD, EMAIL, left(uuid(), 8))
-
-Table: game
-
-columns:
-user_id🔑   gamestate
-int          json
+VALUES(NAME, PASSWORD, EMAIL, left(uuid(), 8), '{}')
 
 gamestate
 contains array of background images
