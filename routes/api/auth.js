@@ -1,22 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 var con = mysql.createConnection({
-    host: "10.0.0.93",
-    user: "walter",
+    host: "localhost",
+    user: "root",
     password: "password",
     database: "project_database"
 });
 
 con.connect( function(err) {
-    if (err) throw err;
-    console.log("Database connection established!");
+    if (err) {
+        console.log("Database configuration incorrect!");
+        throw err;
+    }
+    else
+        console.log("Database connection established!");
 });
-
-router.use(bodyParser.urlencoded({extended: true}));
 
 router.get('/', (req, res) => {
     res.send('Read the README.html in the public folder to learn how to use');
@@ -78,7 +79,7 @@ router.post('/login', async (req, res) => {
                 storedPass = result[0].user_password;
                 const passwordMatch = bcrypt.compareSync(req.body.password, storedPass);
                 if (passwordMatch) {
-                    res.redirect('/game');
+                    res.status(200).json({ status: 200})
                 }
                 else {
                     res.status(400).json({ msg: 'Incorrect Password'})

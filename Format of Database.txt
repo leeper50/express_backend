@@ -1,10 +1,16 @@
 Format of Database
 
+download xammp [https://www.apachefriends.org/index.html]
+
+start apache and mysql services
+
+make project_database
+
 Table: user_information
 
 columns:
 user_id🔑  user_name    user_password    user_email    user_code    gamestate
-auto inc   string       string           string        string       json
+auto inc   text         text             text          text       json
 
 Insert Syntax:
 INSERT INTO user_information(user_name, user_password, user_email, user_code) 

@@ -13,6 +13,7 @@ fs.readdir(path.join(token_path), (err, files) => {
 })
 
 router.get('/', async(req, res) => {
+    console.log('ewhqeghjq')
     res.json(token_list);
 });
 
