@@ -28,12 +28,12 @@ router.get('/', async(req, res) => {
     console.log('/state GET called');
     let exist_query = `SELECT gamestate FROM user_information WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
-        if (err) {
-            res.status(400).json({status: 400, msg: "username not found"});
-            throw err;
+        if (result[0] == undefined) {
+            res.status(400).json({ msg: 'User does not exist'})
+        } 
+        else {   
+            res.status(200).send(result[0].gamestate);
         }
-
-        res.send(result[0].gamestate);
     });
 });
 
@@ -47,12 +47,12 @@ router.get('/', async(req, res) => {
     console.log('/state POST called');
     let exist_query = `UPDATE user_information SET gamestate = '${gamestate}' WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
-        console.log()
-        if (err) {
-            res.status(400).json({status: 400, msg: "username not found"});
-            throw err;
+        if (result.message.includes("(Rows matched: 0")) {
+            res.status(400).json({ msg: 'User does not exist'})
+        } 
+        else {
+            res.status(200).json({ msg: "User\'s gamestate was updated"})
         }
-        res.json(result[0]);
     });
 });
 

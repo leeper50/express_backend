@@ -51,12 +51,12 @@ router.get('/', (req, res) => {
                     if (err) throw err;
                     console.log(`${newUser.username} has been added.`);
                 });
-                res.status(200).json({msg : "User created"});
+                res.status(200).json({status: 200, msg : "User created"});
             } else {
-                res.status(400).json({msg : "User exists"});
+                res.status(400).json({status: 400, msg : "User exists"});
             }
         } catch {
-            res.status(500).json({msg : "Internal server error"});
+            res.status(400).json({status: 400, msg : "Request format error"});
         }
     });
 });
@@ -80,15 +80,15 @@ router.post('/login', async (req, res) => {
                 storedPass = result[0].user_password;
                 const passwordMatch = bcrypt.compareSync(req.body.password, storedPass);
                 if (passwordMatch) {
-                    res.status(200).json({ status: 200})
+                    res.status(200).json({ status: 200, msg: 'User is logged in'})
                 }
                 else {
-                    res.status(400).json({ status: 400})
+                    res.status(400).json({ status: 400, msg: 'Incorrect password'})
                 }
             }
         });
-    } catch{
-        res.status(500).json({ status: 500})
+    } catch {
+        res.status(400).json({ status: 400, msg: 'Request format error'})
     }
 });
 
