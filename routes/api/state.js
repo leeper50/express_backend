@@ -24,8 +24,7 @@ con.connect( function(err) {
  * This function will allow the user to load their game's state
  * The state will be returned as a json object
  */
-router.post('/update', async(req, res) => {
-    console.log(req.body);
+router.post('/retreive', async(req, res) => {
     let exist_query = `SELECT gamestate FROM user_information WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
         if (result[0] == undefined) {
@@ -46,6 +45,8 @@ router.post('/update', async(req, res) => {
     let gamestate = JSON.stringify(req.body)
     let exist_query = `UPDATE user_information SET gamestate = '${gamestate}' WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
+        if (err) throw err;
+        console.log("ejhwqwejkwq", result)
         if (result.message.includes("(Rows matched: 0")) {
             res.status(400).json({ msg: 'User does not exist'})
         } 
