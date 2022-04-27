@@ -39,14 +39,13 @@ router.post('/retreive', async(req, res) => {
 /**
  * This function will allow the user to save their game's state
  * The json passed to the method must have a username field
- * The state should be sent as a json object
+ * The state should be sent as a string
  */
  router.post('/', async(req, res) => {
     let gamestate = JSON.stringify(req.body)
     let exist_query = `UPDATE user_information SET gamestate = '${gamestate}' WHERE user_name = '${req.body.username}'`;
     await con.query(exist_query, function(err, result) {
         if (err) throw err;
-        console.log("ejhwqwejkwq", result)
         if (result.message.includes("(Rows matched: 0")) {
             res.status(400).json({ msg: 'User does not exist'})
         } 
