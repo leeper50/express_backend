@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -15,8 +16,10 @@ con.connect( function(err) {
     console.log("Database connection established!");
 });
 
+router.use(bodyParser.urlencoded({extended: true}));
+
 router.get('/', (req, res) => {
-    res.send('You can make a post request with auth/login and auth/register. You must pass a field with id username or password');
+    res.send('Read the README.html in the public folder to learn how to use');
 });
 
 /**
@@ -39,7 +42,7 @@ router.get('/', (req, res) => {
                     username: req.body.username,
                     password: hashPassword,
                 };
-    
+
                 let query = `INSERT INTO user_information (user_name,user_password,user_email,user_code,gamestate) ` +
                 `VALUES ('${newUser.username}','${newUser.password}','default@example.com',left(uuid(), 8),'{}');`;
 
@@ -62,7 +65,7 @@ router.get('/', (req, res) => {
  * After successful authentication, the user will move to their home page
  * Failure will result in a relogin attempt
  */
- router.post('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         let storedPass;
         let query = `SELECT * FROM user_information WHERE user_name = '${req.body.username}'`;

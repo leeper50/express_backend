@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require("path");
-// const { hasUncaughtExceptionCaptureCallback } = require('process');
-// const { query } = require('express');
 
 const port = process.env.PORT || 9000
 const app = express();
