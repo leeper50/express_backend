@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const { json } = require('express/lib/response');
 
 router.use(express.json());
 
@@ -21,6 +19,7 @@ con.connect( function(err) {
     else
         console.log("Database connection established!");
 });
+
 /**
  * This function will allow the user to load their game's state
  * The state will be returned as a json object
