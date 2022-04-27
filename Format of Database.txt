@@ -1,22 +1,30 @@
 Format of Database
 
-download xammp [https://www.apachefriends.org/index.html]
+How to run Database:
 
-start apache and mysql services
+1. Download Xammp [https://www.apachefriends.org/index.html]
 
-make project_database
+2. Start apache and mysql services
+
+3. Navigate to http://localhost/phpmyadmin
+
+4. Make a new database called project_database
+
+5. Create a table called user_information
+
+6. Create 6 columns and specifiy types as laid out below
+
 
 Table: user_information
 
-columns:
+Columns:
 user_id🔑  user_name    user_password    user_email    user_code    gamestate
-auto inc   text         text             text          text       json
+auto inc   text         text             text          text         json
 
 Insert Syntax:
 INSERT INTO user_information(user_name, user_password, user_email, user_code) 
 VALUES(NAME, PASSWORD, EMAIL, left(uuid(), 8), '{}')
 
-gamestate
-contains array of background images
-tokens w/ xy position, and current layer
+Gamestate:
+Contains data such as background loaded, tokens loaded, and token position.
 
