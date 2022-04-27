@@ -13,11 +13,11 @@ var con = mysql.createConnection({
 
 con.connect( function(err) {
     if (err) {
-        console.log("Database configuration incorrect!");
+        console.log("State database configuration incorrect!");
         throw err;
     }
     else
-        console.log("Database connection established!");
+        console.log("State database connection established!");
 });
 
 /**

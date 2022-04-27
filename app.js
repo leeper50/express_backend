@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.sendFile(path.join(__dirname,'./public/README.html'));
 });
 

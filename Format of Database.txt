@@ -26,7 +26,7 @@ INSERT INTO user_information(user_name, user_password, user_email, user_code)
 VALUES(NAME, PASSWORD, EMAIL, left(uuid(), 8), '{}')
 
 Gamestate:
-Contains data such as background loaded, tokens loaded, and token position.
+Contains data such as background loaded, tokens loaded, token position, and token health.
 
 
 SQL query to create database from cli.
